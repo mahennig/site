@@ -5,15 +5,15 @@
   <link href="https://markushennig.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://markushennig.com/blog/" rel="alternate" type="text/html"/>
   <id>https://markushennig.com/</id>
-  <updated>2026-11-27T12:00:00Z</updated>
+  <updated>2026-11-27T14:00:00Z</updated>
   <author><name>Markus Hennig</name><uri>https://markushennig.com/</uri></author>
   <entry>
     <title>October 2026: AI didn’t change the attacks. It changed the clock.</title>
     <link href="https://markushennig.com/blog/ai-compressed-the-clock-october-2026/" rel="alternate" type="text/html"/>
     <id>https://markushennig.com/blog/ai-compressed-the-clock-october-2026/</id>
     <published>2026-11-27T12:00:00Z</published>
-    <updated>2026-11-27T12:00:00Z</updated>
+    <updated>2026-11-27T14:00:00Z</updated>
     <category term="Cybersecurity"/>
-    <summary>What PHP2Shell, the poisoned LiteLLM release and autonomous attack agents showed about AI, speed and old security mistakes, with architecture takeaways.</summary>
+    <summary>What PHP2Shell, Node.js, nginx, the poisoned LiteLLM release, Java4Shell and autonomous attack agents showed about AI, speed and old security mistakes, with architecture takeaways.</summary>
   </entry>
 </feed>

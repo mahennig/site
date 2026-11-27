@@ -6,7 +6,7 @@ Facts about the author: software architect working where architecture and cybers
 
 ## Writing
 
-- [October 2026: AI didn't change the attacks. It changed the clock.](https://markushennig.com/blog/ai-compressed-the-clock-october-2026/): What PHP2Shell, the poisoned LiteLLM release and autonomous attack agents showed about AI, speed and old security mistakes, with architecture takeaways.
+- [October 2026: AI didn't change the attacks. It changed the clock.](https://markushennig.com/blog/ai-compressed-the-clock-october-2026/): What PHP2Shell, Node.js, nginx, the poisoned LiteLLM release, Java4Shell and autonomous attack agents showed about AI, speed and old security mistakes, with architecture takeaways.
 - [All writing](https://markushennig.com/blog/): Index of all articles.
 
 ## Site
