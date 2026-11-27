@@ -1,4 +1,5 @@
 # Everyone is welcome, including search and AI crawlers.
+# Flag 2/3: MH{robots_txt_is_not_access_control}
 User-agent: *
 Allow: /
 

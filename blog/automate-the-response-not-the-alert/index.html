@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' 'inline-speculation-rules'; style-src 'self'; base-uri 'self'; form-action 'none'">
+  <title>Automate the response, not the alert — Markus Hennig</title>
+  <meta name="description" content="Most security automation is a fast way to open a ticket. Four patterns that close the gap between alert and fix: revoke leaked secrets, auto-merge patches, pre-built kill switches and SBOM queries. Plus how to keep the bot from becoming the breach.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Automate the response, not the alert">
+  <meta property="og:description" content="Four automation patterns that turn security alerts into fixes, and the guardrails that keep the bot from becoming the breach.">
+  <meta property="og:url" content="https://markushennig.com/blog/automate-the-response-not-the-alert/">
+  <meta property="og:site_name" content="Markus Hennig">
+  <meta property="og:image" content="https://markushennig.com/assets/img/og/automate-the-response-not-the-alert.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Automate the response, not the alert — Markus Hennig">
+  <meta property="article:published_time" content="2026-11-27T15:00:00Z">
+  <meta property="article:author" content="Markus Hennig">
+  <meta property="article:section" content="Cybersecurity">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://markushennig.com/assets/img/og/automate-the-response-not-the-alert.png">
+  <meta name="author" content="Markus Hennig">
+  <meta name="theme-color" content="#0d0d0b">
+  <link rel="canonical" href="https://markushennig.com/blog/automate-the-response-not-the-alert/">
+  <link rel="alternate" type="application/atom+xml" title="Markus Hennig — Writing" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://markushennig.com/blog/automate-the-response-not-the-alert/#post", "mainEntityOfPage": "https://markushennig.com/blog/automate-the-response-not-the-alert/", "headline": "Automate the response, not the alert", "description": "Four automation patterns that turn security alerts into fixes: revoke leaked secrets, auto-merge patches, pre-built kill switches and SBOM queries, plus guardrails for the automation itself.", "datePublished": "2026-11-27T15:00:00Z", "dateModified": "2026-11-27T15:00:00Z", "inLanguage": "en", "articleSection": "Cybersecurity", "keywords": ["security automation", "DevSecOps", "incident response", "Dependabot", "SBOM", "secret rotation", "software architecture"], "image": "https://markushennig.com/assets/img/og/automate-the-response-not-the-alert.png", "author": {"@id": "https://markushennig.com/#me"}, "publisher": {"@id": "https://markushennig.com/#me"}, "isPartOf": {"@id": "https://markushennig.com/blog/#blog"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://markushennig.com/"}, {"@type": "ListItem", "position": 2, "name": "Writing", "item": "https://markushennig.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Automate the response, not the alert"}]}]}</script>
+  <script type="speculationrules">{"prefetch": [{"where": {"href_matches": "/*"}, "eagerness": "moderate"}]}</script>
+  <script src="../../assets/js/theme.js"></script>
+  <script src="../../assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="logo" href="../../" aria-label="Markus Hennig — home"><img class="logo-mark" src="../../favicon.svg" alt="" width="30" height="30"><span class="logo-text">Markus <em>Hennig</em></span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../../#about">About</a>
+      <a href="../../#projects">Projects</a>
+      <a href="../" aria-current="page">Writing</a>
+    </nav>
+    <div class="header-actions">
+      <button class="kbd-btn" type="button" data-palette-open aria-label="Open command menu">
+        <span class="kbd-keys"><kbd class="kbd-mod">⌘</kbd><kbd>K</kbd></span>
+        <span class="kbd-label">Menu</span>
+      </button>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle color theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="article">
+      <header class="page-head">
+        <nav class="breadcrumbs mono" aria-label="Breadcrumb"><a href="../../">Home</a> / <a href="../">Writing</a> / <span>Cybersecurity</span></nav>
+        <h1 class="page-title">Automate the response, not the alert.</h1>
+        <p class="article-meta mono">
+          <time datetime="2026-11-27">27 Nov 2026</time>
+          <span>7 min read</span>
+        </p>
+      </header>
+
+      <div class="prose">
+        <p>My <a href="../ai-compressed-the-clock-october-2026/">last article</a> ended with one line I want to unpack: automate the response, not only the alert. Most security automation I see is a very efficient way to create a ticket. The scanner finds something in four seconds, the ticket waits four weeks, and everyone agrees the pipeline is “shift-left”.</p>
+
+        <p>If an attacker gets from disclosure to working exploit in a day, your alert latency is not the problem. Your response latency is. This post is about the boring part in between: what actually happens after the red badge appears.</p>
+
+        <h2>The gap nobody measures</h2>
+        <p>Teams track mean time to detect because the tools report it for free. Few track the time from “we know” to “it is fixed in production”. That number lives in Slack threads, change advisory boards and someone’s vacation calendar.</p>
+
+        <p>Split the response into three steps and time each one: <strong>decide</strong> (is this real and does it affect us?), <strong>change</strong> (write the fix or the mitigation) and <strong>ship</strong> (get it through the pipeline). In my experience the change is the shortest step. Deciding and shipping eat the days. Automation should attack those two.</p>
+
+        <h2>Pattern 1: a leaked secret gets revoked, not reported</h2>
+        <p>A secret scanner that sends an email is a notification service. The useful version revokes the credential first and asks questions afterwards. Revoking a working key is annoying. An attacker with that key is worse.</p>
+
+        <p>This only works if rotation is a machine operation. If replacing a database password means a human edits four config files and restarts three services, you do not have rotation. You have a ceremony. The architecture decisions that make automatic revocation possible:</p>
+        <ul>
+          <li><strong>Short-lived credentials by default.</strong> CI pipelines get cloud access via OIDC federation instead of stored keys. A token that expires in an hour is a leak you can mostly ignore.</li>
+          <li><strong>One secret store, read at runtime.</strong> Services fetch credentials instead of baking them into images. Rotation then means: write the new value, revoke the old one, done.</li>
+          <li><strong>Every credential has an owner and a revoke path.</strong> If nobody knows how to revoke it, assume it lives forever. The LiteLLM incident from October started with an admin key that was known to be leaked and never revoked.</li>
+        </ul>
+
+        <h2>Pattern 2: a patch gets merged, not triaged</h2>
+        <p>Dependabot and Renovate open pull requests. Humans then ignore them, because there are forty and they all look the same. The fix is not more discipline. The fix is to let the boring ones merge themselves.</p>
+
+        <pre><code>name: dependabot-automerge
+on: pull_request
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  automerge:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - id: meta
+        uses: dependabot/fetch-metadata@v2   # pin to a commit SHA in real life
+      - if: steps.meta.outputs.update-type == 'version-update:semver-patch'
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}</code></pre>
+
+        <p><code>--auto</code> means GitHub merges only after the required checks pass. That makes your test suite the security control. If your tests mock every database and HTTP call, auto-merge is a coin toss. Tests against real infrastructure in containers are what make this safe. I wrote an <a href="https://github.com/mahennig/quarkus-testcontainer" target="_blank" rel="noopener noreferrer">example repository</a> for exactly that, for Quarkus.</p>
+
+        <p>For everything above patch level, prioritize by evidence, not by score. A CVSS 9.8 that nobody exploits matters less than a 7.5 on the <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener noreferrer">CISA KEV catalog</a>. <a href="https://www.first.org/epss/" target="_blank" rel="noopener noreferrer">EPSS</a> adds a probability of exploitation. Both are free and machine-readable, so the routing rule can be code: in KEV or high EPSS means page someone, everything else waits for the next batch.</p>
+
+        <h2>Pattern 3: a mitigation is a switch, not a project</h2>
+        <p>Many critical CVEs come with a workaround: disable a feature, set a flag, block a path. <code>http2 off;</code> in nginx. <code>-XX:-UseBASE64Intrinsics</code> for the JVM. These are one-line changes that take days, because nobody pre-agreed who may make them.</p>
+
+        <p>Decide in peacetime. For each internet-facing component, list the switches you can flip without a full release: config flags, feature toggles, WAF rules, a route you can turn off. Make them deployable through the same pipeline, and pre-approve them as standard changes. When the advisory lands, the decision is “flip it or not”, not “schedule a meeting about the meeting”.</p>
+
+        <p>A switch nobody has tested is a hope. Flip each one in staging once a quarter.</p>
+
+        <h2>Pattern 4: “are we affected?” is a query, not a thread</h2>
+        <p>The first question after every big disclosure is whether you run the thing. The usual answer is a Slack thread with fourteen people grepping repositories. Generate an SBOM for every build (CycloneDX or SPDX), store it next to the artifact, and the question becomes a query:</p>
+
+        <pre><code>jq -r --arg n brotli '
+  .metadata.component.name as $svc
+  | .components[]? | select(.name == $n)
+  | "\($svc)  \(.version)"' sboms/*.cdx.json</code></pre>
+
+        <p>This also exposes the trap from October: bundled dependencies. Node ships its own Brotli, and your scanner reads <code>package.json</code>. An SBOM generated from the built artifact, not the manifest, catches more of that. Not all of it. Runtimes and base images need their own entries.</p>
+
+        <h2>Don’t let the bot become the breach</h2>
+        <p>Every automation in this post holds power: it merges code, rotates secrets, changes production config. That makes it a target. The October LiteLLM compromise ran through a token taken from an internal agent platform, and that token could override branch protection. Automation with broad rights is just a privileged account that never takes a holiday.</p>
+        <ul>
+          <li><strong>Narrow identities.</strong> The auto-merge bot can merge. It cannot change branch protection, add secrets or approve its own changes.</li>
+          <li><strong>Pin what you run.</strong> Third-party actions by commit SHA, not by tag. Tags move.</li>
+          <li><strong>Log every action with a reason.</strong> “Revoked key X because scanner Y matched commit Z” is an audit trail. “Done” is not.</li>
+          <li><strong>Rate limits and a big red button.</strong> A buggy rotation job that revokes everything at 3 am is an outage you scheduled yourself.</li>
+          <li><strong>Humans for the irreversible.</strong> Deleting data, failing over regions, rotating root keys. Automate the preparation, keep the final click.</li>
+        </ul>
+
+        <h2>Where to start on Monday</h2>
+        <p>Do not build a platform. Pick the credential you would least like to see on Pastebin and answer one question: can a script revoke and replace it in five minutes, without breaking production? If yes, wire the scanner to that script. If no, you just found your next architecture task.</p>
+
+        <p>Then turn on auto-merge for patch updates in one repository with decent tests, and watch it for a month. Most teams find the scary part was never the merge. It was admitting that nobody read those pull requests anyway.</p>
+
+        <p>This is my opinion, built on what I have seen work and fail. Counter-arguments are welcome at <a href="mailto:mail@markushennig.com">mail@markushennig.com</a>.</p>
+      </div>
+
+      <aside class="related" aria-labelledby="related-title">
+        <h2 id="related-title" class="mono">Read next</h2>
+        <a class="post-link" href="../ai-compressed-the-clock-october-2026/">
+          <time class="post-date mono" datetime="2026-11-27">27 Nov 2026</time>
+          <span class="post-title">October 2026: AI didn’t change the attacks. It changed the clock.</span>
+          <span class="post-meta mono">Cybersecurity · 5 min</span>
+        </a>
+      </aside>
+
+      <footer class="article-foot">
+        <a class="link-arrow" href="../">← All writing</a>
+        <a class="link-arrow" href="../../">Home <span aria-hidden="true">→</span></a>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span data-year>2026</span> Markus Hennig <span class="footer-note mono">· 0 cookies · 0 trackers · 1 human</span></p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/mahennig" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/markus-hennig-80b301139" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:mail@markushennig.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

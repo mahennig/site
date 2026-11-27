@@ -57,6 +57,13 @@
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  /* ---------- Hello, fellow source reader ---------- */
+  console.log(
+    '%c> whoami%c\nMarkus Hennig, secure by design.\n\nThree flags (MH{...}) are hidden on this site. One is in this page\'s source.\nThe other two live where crawlers and security researchers look first.\nFound all three? Mail them to ' + SITE.email + '.',
+    'color:#d7ff3a;background:#0d0d0b;font:600 14px ui-monospace,monospace;padding:4px 8px;',
+    'font:12px ui-monospace,monospace;'
+  );
+
   /* ---------- Small details ---------- */
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
@@ -144,8 +151,12 @@
     new ResizeObserver(resize).observe(canvas);
     document.addEventListener('themechange', () => { readColors(); schedule(); });
 
+    let visible = true;
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(canvas);
+
     if (!reduceMotion) {
       addEventListener('pointermove', (e) => {
+        if (!visible) return;
         const r = canvas.getBoundingClientRect();
         pointer.x = e.clientX - r.left;
         pointer.y = e.clientY - r.top;
@@ -164,9 +175,13 @@
   const commands = [
     { group: 'Navigate', label: 'Home', run: () => go(root) },
     { group: 'Navigate', label: 'About', run: () => go(`${root}#about`) },
+    { group: 'Navigate', label: 'Projects', run: () => go(`${root}#projects`) },
     { group: 'Navigate', label: 'Writing', run: () => go(`${root}blog/`) },
+    { group: 'Read', label: 'Automate the response, not the alert', run: () => go(`${root}blog/automate-the-response-not-the-alert/`) },
+    { group: 'Read', label: 'October 2026: AI changed the clock', run: () => go(`${root}blog/ai-compressed-the-clock-october-2026/`) },
     { group: 'Elsewhere', label: 'GitHub', hint: '↗', run: () => openExternal(SITE.github) },
     { group: 'Elsewhere', label: 'LinkedIn', hint: '↗', run: () => openExternal(SITE.linkedin) },
+    { group: 'Elsewhere', label: 'Source code of this site', hint: '↗', run: () => openExternal(`${SITE.github}/site`) },
     { group: 'Actions', label: 'Copy email address', run: copyEmail },
     { group: 'Actions', label: 'Send an email', run: () => go(`mailto:${SITE.email}`) },
     { group: 'Actions', label: 'Toggle light / dark theme', hint: 'T', run: toggleTheme },

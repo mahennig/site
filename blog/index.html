@@ -3,24 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; base-uri 'self'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' 'inline-speculation-rules'; style-src 'self'; base-uri 'self'; form-action 'none'">
   <title>Writing — Markus Hennig</title>
   <meta name="description" content="Occasional notes on software architecture, cybersecurity, hiking and cooking by Markus Hennig.">
   <meta name="theme-color" content="#0d0d0b">
   <link rel="canonical" href="https://markushennig.com/blog/">
   <link rel="alternate" type="application/atom+xml" title="Markus Hennig — Writing" href="../feed.xml">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Writing — Markus Hennig">
   <meta property="og:description" content="Occasional notes on software architecture, cybersecurity, hiking and cooking by Markus Hennig.">
   <meta property="og:url" content="https://markushennig.com/blog/">
   <meta property="og:site_name" content="Markus Hennig">
   <meta property="og:image" content="https://markushennig.com/assets/img/og.png">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://markushennig.com/assets/img/og.png">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="stylesheet" href="../assets/css/style.css">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Blog", "@id": "https://markushennig.com/blog/#blog", "url": "https://markushennig.com/blog/", "name": "Markus Hennig — Writing", "inLanguage": "en", "author": {"@id": "https://markushennig.com/#me"}, "publisher": {"@id": "https://markushennig.com/#me"}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Blog", "@id": "https://markushennig.com/blog/#blog", "url": "https://markushennig.com/blog/", "name": "Markus Hennig — Writing", "inLanguage": "en", "author": {"@id": "https://markushennig.com/#me"}, "publisher": {"@id": "https://markushennig.com/#me"}, "blogPost": [{"@id": "https://markushennig.com/blog/automate-the-response-not-the-alert/#post"}, {"@id": "https://markushennig.com/blog/ai-compressed-the-clock-october-2026/#post"}]}</script>
+  <script type="speculationrules">{"prefetch": [{"where": {"href_matches": "/*"}, "eagerness": "moderate"}]}</script>
   <script src="../assets/js/theme.js"></script>
   <script src="../assets/js/main.js" defer></script>
 </head>
@@ -31,6 +35,7 @@
     <a class="logo" href="../" aria-label="Markus Hennig — home"><img class="logo-mark" src="../favicon.svg" alt="" width="30" height="30"><span class="logo-text">Markus <em>Hennig</em></span></a>
     <nav class="nav" aria-label="Main">
       <a href="../#about">About</a>
+      <a href="../#projects">Projects</a>
       <a href="./" aria-current="page">Writing</a>
     </nav>
     <div class="header-actions">
@@ -54,6 +59,13 @@
 
     <ul class="post-list reveal">
       <li>
+        <a class="post-link" href="automate-the-response-not-the-alert/">
+          <time class="post-date mono" datetime="2026-11-27">27 Nov 2026</time>
+          <span class="post-title">Automate the response, not the alert.</span>
+          <span class="post-meta mono">Cybersecurity · 7 min</span>
+        </a>
+      </li>
+      <li>
         <a class="post-link" href="ai-compressed-the-clock-october-2026/">
           <time class="post-date mono" datetime="2026-11-27">27 Nov 2026</time>
           <span class="post-title">October 2026: AI didn’t change the attacks. It changed the clock.</span>
@@ -66,7 +78,7 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <p>© <span data-year>2026</span> Markus Hennig</p>
+      <p>© <span data-year>2026</span> Markus Hennig <span class="footer-note mono">· 0 cookies · 0 trackers · 1 human</span></p>
       <ul class="footer-links">
         <li><a href="https://github.com/mahennig" target="_blank" rel="noopener noreferrer">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/markus-hennig-80b301139" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>

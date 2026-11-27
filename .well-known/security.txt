@@ -1,0 +1,8 @@
+# Found something on markushennig.com? Thank you. Please tell me privately first.
+Contact: mailto:mail@markushennig.com
+Expires: 2027-11-27T00:00:00.000Z
+Preferred-Languages: en, de
+Canonical: https://markushennig.com/.well-known/security.txt
+
+# Flag 3/3: MH{security_txt_is_rfc_9116}
+# Found all three? Send them to the contact above and you go into the hall of fame.
