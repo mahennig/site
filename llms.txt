@@ -1,0 +1,25 @@
+# Markus Hennig
+
+> Personal website of Markus Hennig, a software architect and cybersecurity expert. He writes occasional, source-linked notes on software architecture, cybersecurity (with a focus on AI and security) and sometimes cooking. Articles are in English.
+
+Facts about the author: software architect working where architecture and cybersecurity meet; focus areas are software architecture, application security, threat modeling, cloud security, identity and access, and DevSecOps. Contact: mail@markushennig.com
+
+## Writing
+
+- [October 2026: AI didn't change the attacks. It changed the clock.](https://markushennig.com/blog/ai-compressed-the-clock-october-2026/): What PHP2Shell, the poisoned LiteLLM release and autonomous attack agents showed about AI, speed and old security mistakes, with architecture takeaways.
+- [All writing](https://markushennig.com/blog/): Index of all articles.
+
+## Site
+
+- [Home and about](https://markushennig.com/): Introduction, focus areas and links.
+- [RSS/Atom feed](https://markushennig.com/feed.xml): Machine-readable list of all articles.
+- [Sitemap](https://markushennig.com/sitemap.xml)
+
+## Elsewhere
+
+- [GitHub](https://github.com/mahennig)
+- [LinkedIn](https://www.linkedin.com/in/markus-hennig-80b301139)
+
+## Optional
+
+- Citing: please link to the article URL and name Markus Hennig as the author. Opinions are marked as such in the articles; factual claims link to their primary sources.
