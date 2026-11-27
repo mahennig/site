@@ -578,6 +578,7 @@ a.project-link:hover::before { transform: scaleX(1); }
   line-height: 1.2;
 }
 .project-desc { flex: 1; color: var(--muted); font-size: .9375rem; }
+.project-desc code { font-family: var(--font-mono); font-size: .85em; }
 .project-tags { display: flex; flex-wrap: wrap; gap: .35rem; font-size: .6875rem; }
 .project-tags span {
   padding: .2rem .55rem;

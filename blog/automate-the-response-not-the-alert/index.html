@@ -112,6 +112,8 @@ jobs:
 
         <p><code>--auto</code> means GitHub merges only after the required checks pass. That makes your test suite the security control. If your tests mock every database and HTTP call, auto-merge is a coin toss. Tests against real infrastructure in containers are what make this safe. I wrote an <a href="https://github.com/mahennig/quarkus-testcontainer" target="_blank" rel="noopener noreferrer">example repository</a> for exactly that, for Quarkus.</p>
 
+        <p>The same gate should hold your security tests. If an update breaks token validation or lets one user read another user’s data, the merge must stop on its own. My <a href="https://github.com/mahennig/quarkus-security-testing" target="_blank" rel="noopener noreferrer">quarkus-security-testing</a> repository runs an authorization matrix, BOLA checks, token validation and an OWASP ZAP scan in every build. It also proves the tests can fail, against a deliberately insecure profile.</p>
+
         <p>For everything above patch level, prioritize by evidence, not by score. A CVSS 9.8 that nobody exploits matters less than a 7.5 on the <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener noreferrer">CISA KEV catalog</a>. <a href="https://www.first.org/epss/" target="_blank" rel="noopener noreferrer">EPSS</a> adds a probability of exploitation. Both are free and machine-readable, so the routing rule can be code: in KEV or high EPSS means page someone, everything else waits for the next batch.</p>
 
         <h2>Pattern 3: a mitigation is a switch, not a project</h2>

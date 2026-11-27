@@ -13,7 +13,7 @@ Facts about the author: software architect working where architecture and cybers
 ## Projects
 
 - [quarkus-testcontainer](https://github.com/mahennig/quarkus-testcontainer): Quarkus integration tests against PostgreSQL, MongoDB and S3 (Floci) with Testcontainers.
-- [site](https://github.com/mahennig/site): Source of this website.
+- [quarkus-security-testing](https://github.com/mahennig/quarkus-security-testing): Automated security tests for a Quarkus REST API (authorization matrix, BOLA/IDOR, token validation, security headers, OWASP ZAP) against a real Keycloak.
 
 ## Site
 
