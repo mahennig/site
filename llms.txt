@@ -6,6 +6,7 @@ Facts about the author: software architect working where architecture and cybers
 
 ## Writing
 
+- [OPTIMJACK: that third-party script is your code now.](https://markushennig.com/blog/optimjack-third-party-script-is-your-code/): The November 2026 Optimizely script compromise, why Subresource Integrity and CSP only partly help against vendor-hosted scripts, and what to change on checkout and login pages.
 - [Automate the response, not the alert.](https://markushennig.com/blog/automate-the-response-not-the-alert/): Four security automation patterns (secret revocation, patch auto-merge, pre-approved kill switches, SBOM queries) and guardrails for automation identities.
 - [October 2026: AI didn't change the attacks. It changed the clock.](https://markushennig.com/blog/ai-compressed-the-clock-october-2026/): What PHP2Shell, Node.js, nginx, the poisoned LiteLLM release, Java4Shell and autonomous attack agents showed about AI, speed and old security mistakes, with architecture takeaways.
 - [All writing](https://markushennig.com/blog/): Index of all articles.

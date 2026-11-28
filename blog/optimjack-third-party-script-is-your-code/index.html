@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' 'inline-speculation-rules'; style-src 'self'; base-uri 'self'; form-action 'none'">
+  <title>OPTIMJACK: that third-party script is your code now — Markus Hennig</title>
+  <meta name="description" content="In November 2026 attackers wrote malware into Optimizely-hosted scripts and 178 organizations served it. Why vendor scripts are your code, why SRI does not save you, and what I would change.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="OPTIMJACK: that third-party script is your code now">
+  <meta property="og:description" content="Attackers wrote malware into Optimizely-hosted scripts. What it says about third-party code on your pages.">
+  <meta property="og:url" content="https://markushennig.com/blog/optimjack-third-party-script-is-your-code/">
+  <meta property="og:site_name" content="Markus Hennig">
+  <meta property="og:image" content="https://markushennig.com/assets/img/og/optimjack-third-party-script-is-your-code.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="OPTIMJACK: that third-party script is your code now — Markus Hennig">
+  <meta property="article:published_time" content="2026-11-28T12:00:00Z">
+  <meta property="article:author" content="Markus Hennig">
+  <meta property="article:section" content="Cybersecurity">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://markushennig.com/assets/img/og/optimjack-third-party-script-is-your-code.png">
+  <meta name="author" content="Markus Hennig">
+  <meta name="theme-color" content="#0d0d0b">
+  <link rel="canonical" href="https://markushennig.com/blog/optimjack-third-party-script-is-your-code/">
+  <link rel="alternate" type="application/atom+xml" title="Markus Hennig — Writing" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://markushennig.com/blog/optimjack-third-party-script-is-your-code/#post", "mainEntityOfPage": "https://markushennig.com/blog/optimjack-third-party-script-is-your-code/", "headline": "OPTIMJACK: that third-party script is your code now.", "description": "In November 2026 attackers wrote malware into Optimizely-hosted scripts and 178 organizations served it. Why vendor scripts are your code, why SRI does not save you, and what I would change.", "datePublished": "2026-11-28T12:00:00Z", "dateModified": "2026-11-28T12:00:00Z", "inLanguage": "en", "articleSection": "Cybersecurity", "keywords": ["cybersecurity", "supply chain security", "OPTIMJACK", "Optimizely", "Content Security Policy", "Subresource Integrity", "software architecture"], "image": "https://markushennig.com/assets/img/og/optimjack-third-party-script-is-your-code.png", "author": {"@id": "https://markushennig.com/#me"}, "publisher": {"@id": "https://markushennig.com/#me"}, "isPartOf": {"@id": "https://markushennig.com/blog/#blog"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://markushennig.com/"}, {"@type": "ListItem", "position": 2, "name": "Writing", "item": "https://markushennig.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "OPTIMJACK: that third-party script is your code now"}]}]}</script>
+  <script type="speculationrules">{"prefetch": [{"where": {"href_matches": "/*"}, "eagerness": "moderate"}]}</script>
+  <script src="../../assets/js/theme.js"></script>
+  <script src="../../assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="logo" href="../../" aria-label="Markus Hennig — home"><img class="logo-mark" src="../../favicon.svg" alt="" width="30" height="30"><span class="logo-text">Markus <em>Hennig</em></span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../../#about">About</a>
+      <a href="../../#projects">Projects</a>
+      <a href="../" aria-current="page">Writing</a>
+    </nav>
+    <div class="header-actions">
+      <button class="kbd-btn" type="button" data-palette-open aria-label="Open command menu">
+        <span class="kbd-keys"><kbd class="kbd-mod">⌘</kbd><kbd>K</kbd></span>
+        <span class="kbd-label">Menu</span>
+      </button>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle color theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="article">
+      <header class="page-head">
+        <nav class="breadcrumbs mono" aria-label="Breadcrumb"><a href="../../">Home</a> / <a href="../">Writing</a> / <span>Cybersecurity</span></nav>
+        <h1 class="page-title">OPTIMJACK: that third-party script is your code now.</h1>
+        <p class="article-meta mono">
+          <time datetime="2026-11-28">28 Nov 2026</time>
+          <span>5 min read</span>
+        </p>
+      </header>
+
+      <div class="prose">
+        <p>Between 16 and 17 November 2026, at least 178 organizations served a crypto clipper and a card skimmer from their own websites. None of them had a compromised build server or a poisoned npm package. They had one line of JavaScript pointing at a CDN they trusted. My take: that line is not a dependency. It is remote code execution that you have contractually delegated.</p>
+
+        <h2>What happened</h2>
+        <p>According to <a href="https://unit42.paloaltonetworks.com/optimjack-supply-chain-attack/" target="_blank" rel="noopener noreferrer">Palo Alto Networks Unit 42</a>, an attacker exploited a vulnerability in Optimizely’s Web Experimentation platform on 16 November and injected JavaScript into customer accounts. The code sat in the “Project JavaScript” field and was served from Optimizely’s legitimate CDN under Optimizely’s own certificate. <a href="https://www.theregister.com/cyber-crime/2026/11/17/optimizely-hack-turns-worlds-biggest-websites-into-malware-dispensers/5310448" target="_blank" rel="noopener noreferrer">The Register</a> reports that Optimizely put the flaw in its sign-up process. <a href="https://www.stepsecurity.io/blog/optimjack-optimizely-hosted-scripts-crypto-clipper-card-skimmer" target="_blank" rel="noopener noreferrer">StepSecurity</a> relays a later Optimizely statement: the attacker abused the account sign-up flow to impersonate users on targeted customer accounts. Optimizely has not explained how the impersonation worked.</p>
+
+        <p>The count of 178 comes from Scott Helme of Report URI, who identified the scripts and named the incident OPTIMJACK. Unit 42 and The Register both say “at least”, and The Register adds that only a subset of snippets was examined. Per StepSecurity’s write-up of Helme’s data, the list is heavy on banks and financial firms, plus media, retail and airlines.</p>
+
+        <p>The payload, as analyzed by StepSecurity, did two things. It swapped wallet addresses in the clipboard for the attacker’s, and it captured card number, expiry and CVV from checkout forms. Unit 42 adds that the code also attempted to deliver iOS exploit kits. How many devices that reached is unknown. The money side is also fuzzy: Helme traced around $7,000 to attacker wallets by Monday, while StepSecurity cites a lower figure of roughly $2,300 from another analyst. The reputational damage is harder to count in dollars.</p>
+
+        <h2>The timeline, and whose numbers they are</h2>
+        <p>Per Helme’s timeline as relayed by StepSecurity, the first injected code appeared in the early hours of 16 November, and the last infected files were cleaned up that evening. Unit 42 says Optimizely patched the flaw and removed the injected code early on 17 November. These do not conflict as much as they look: one describes visible scripts, the other the vendor’s closing of the hole. Optimizely’s own claims, again via StepSecurity, are that it closed the vulnerability within three hours of detecting it, that this was not a credentials breach, and that fewer than 5% of customers were affected. Those are vendor statements. No root-cause analysis has been published as of today, according to StepSecurity.</p>
+
+        <h2>Why your usual controls did not fire</h2>
+        <p><strong>Integrity pinning.</strong> Subresource Integrity needs a stable file. StepSecurity points out that the snippet changes whenever a team publishes an experiment, so it cannot be pinned to one hash. An experimentation tool is a product whose purpose is to change your page without a deployment. Asking it to also be immutable is a design conflict, not a configuration gap.</p>
+
+        <p><strong>CSP, partly.</strong> A host allowlist in <code>script-src</code> blocks the loader’s download from the attacker’s domain, and a <code>connect-src</code> allowlist blocks exfiltration. But Optimizely’s CDN was on the allowlist, because it had to be. StepSecurity also notes that a nonce-based <code>strict-dynamic</code> policy does not stop this loader, since it trusts scripts that a trusted script adds. The very policy style we recommend for modern apps waves the attack through.</p>
+
+        <p><strong>Consent banners.</strong> They control when a script runs, not what it contains. Nice to have for your lawyers. Irrelevant here.</p>
+
+        <p><strong>Payment iframes.</strong> The one thing that helped. The Register and StepSecurity both note that the skimmer could not read card fields inside cross-origin payment iframes. Pages that used provider-hosted fields leaked far less.</p>
+
+        <h2>My take</h2>
+        <p>An A/B test runs on the page it is testing, with the page’s privileges. In this case the winning variant was “steal the card”, and the uplift was, sadly, statistically significant. The joke is cheap. The architectural point is not: every script you load from another origin runs with the full authority of your origin. Your threat model has to include that vendor’s tenant isolation, sign-up flow and account hygiene, because you have outsourced the integrity of your checkout to them. Unit 42 states the goal well: a compromised vendor script should never be able to touch sensitive user inputs.</p>
+
+        <p>For comparison, this site’s CSP is <code>script-src 'self'</code>, and it has no marketing department. I am aware that this is an unfair comparison.</p>
+
+        <h2>What I would change on Monday</h2>
+        <p>These are my recommendations, built on the sources’ mitigation advice.</p>
+        <ul>
+          <li><strong>Keep non-essential tags off authentication and checkout pages.</strong> Unit 42 recommends exactly this. Marketing can have the landing page.</li>
+          <li><strong>Take card entry out of your origin.</strong> Provider-hosted, cross-origin payment fields were the one control that demonstrably worked here.</li>
+          <li><strong>Inventory every third-party script by page, owner and purpose.</strong> If nobody can say why a tag loads on the login page, it should not.</li>
+          <li><strong>Allowlist hosts in <code>script-src</code> and <code>connect-src</code>, and watch CSP reports.</strong> It will not stop a compromised vendor, but it can stop the second-stage domain and the exfiltration, and it gives you a signal.</li>
+          <li><strong>Monitor what vendors actually serve.</strong> Diff the delivered script and the vendor project fields, not only your repository. StepSecurity advises reviewing Optimizely users, tokens and project change history if you use it.</li>
+          <li><strong>Hold SaaS vendors to your own bar.</strong> Ask about tenant isolation, sign-up abuse and change auditing before the contract, not after the press release.</li>
+        </ul>
+
+        <p>This is the same lesson as in <a href="../ai-compressed-the-clock-october-2026/">my October roundup</a>: the fundamentals did not change, the blast radius did. A single vendor flaw reached banks, broadcasters and airlines in an afternoon, and no one had to touch their code.</p>
+
+        <p>Corrections and counter-arguments are welcome at <a href="mailto:mail@markushennig.com">mail@markushennig.com</a>.</p>
+
+      </div>
+
+      <aside class="related" aria-labelledby="related-title">
+        <h2 id="related-title" class="mono">Read next</h2>
+        <a class="post-link" href="../ai-compressed-the-clock-october-2026/">
+          <time class="post-date mono" datetime="2026-11-27">27 Nov 2026</time>
+          <span class="post-title">October 2026: AI didn’t change the attacks. It changed the clock.</span>
+          <span class="post-meta mono">Cybersecurity · 5 min</span>
+        </a>
+      </aside>
+
+      <footer class="article-foot">
+        <a class="link-arrow" href="../">← All writing</a>
+        <a class="link-arrow" href="../../">Home <span aria-hidden="true">→</span></a>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span data-year>2026</span> Markus Hennig <span class="footer-note mono">· 0 cookies · 0 trackers · 1 human</span></p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/mahennig" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/markus-hennig-80b301139" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:mail@markushennig.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>
